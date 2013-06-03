@@ -74,6 +74,9 @@
  */
 @property (nonatomic, assign) BOOL usesApproximateQualifier;
 
+/** Specifies that all units should be displayed, rather than just the most significant one that has a value. `NO` by default.  */
+@property (nonatomic, assign) BOOL showsAllUnitsPrecisely;
+
 /**
  Specifies whether to use abbreviated calendar units to describe time intervals, for instance "wks" instead of "weeks" in English. Defaults to `NO`.
  */

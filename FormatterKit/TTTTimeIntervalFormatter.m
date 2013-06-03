@@ -110,9 +110,14 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     for (NSString *unitName in [NSArray arrayWithObjects:@"year", @"month", @"week", @"day", @"hour", @"minute", @"second", nil]) {
         NSNumber *number = [NSNumber numberWithInteger:abs([[components valueForKey:unitName] integerValue])];
         if ([number integerValue]) {
+            
+            NSString *suffix = [NSString stringWithFormat:@"%@ %@", number, [self localizedStringForNumber:[number integerValue] ofCalendarUnit:NSCalendarUnitFromString(unitName)]];
+            
             if (!string) {
-                string = [NSString stringWithFormat:@"%@ %@", number, [self localizedStringForNumber:[number integerValue] ofCalendarUnit:NSCalendarUnitFromString(unitName)]];
-            } else {
+                string = suffix;
+            } else if(self.showsAllUnitsPrecisely){
+                string = [string stringByAppendingFormat:@" %@", suffix];
+            }else{
                 isApproximate = YES;
             }
         }
