@@ -60,6 +60,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 @synthesize usesAbbreviatedCalendarUnits = _usesAbbreviatedCalendarUnits;
 @synthesize usesApproximateQualifier = _usesApproximateQualifier;
 @synthesize usesIdiomaticDeicticExpressions = _usesIdiomaticDeicticExpressions;
+@synthesize showsAllUnitsPrecisely = _showsAllUnitsPrecisely;
 
 - (id)init {
     self = [super init];
