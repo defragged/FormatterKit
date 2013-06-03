@@ -28,6 +28,7 @@ enum {
     StandardPastSectionIndex,
     StandardFutureSectionIndex,
     IdiomaticDeicticExpressionsSectionIndex,
+    NoApproximationSectionIndex,
 } TimeIntervalFormatterViewControllerSectionIndexes;
 
 enum {
@@ -60,7 +61,7 @@ enum {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -75,6 +76,8 @@ enum {
             return NSLocalizedString(@"Standard Future", nil);
         case IdiomaticDeicticExpressionsSectionIndex:
             return NSLocalizedString(@"Idiomatic Past", nil);
+        case NoApproximationSectionIndex:
+            return NSLocalizedString(@"Full Units", nil);
         default:
             return nil;
     }
@@ -97,6 +100,9 @@ enum {
             break;
         case IdiomaticDeicticExpressionsSectionIndex:
             [_timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
+            break;
+        case NoApproximationSectionIndex:
+            [_timeIntervalFormatter setShowsAllUnitsPrecisely:YES];
             break;
     }
     
