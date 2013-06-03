@@ -89,6 +89,9 @@
  */
 @property (nonatomic, assign) BOOL usesIdiomaticDeicticExpressions;
 
+/** Specifies the least significant unit that should be displayed. Defaults to `NSCalendarUnitSeconds`. */
+@property (nonatomic, assign) NSCalendarUnit leastSignificantUnitToShow;
+
 /**
  Returns a string representation of a time interval formatted using the receiver’s current settings.
 

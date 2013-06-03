@@ -61,6 +61,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 @synthesize usesApproximateQualifier = _usesApproximateQualifier;
 @synthesize usesIdiomaticDeicticExpressions = _usesIdiomaticDeicticExpressions;
 @synthesize showsAllUnitsPrecisely = _showsAllUnitsPrecisely;
+@synthesize leastSignificantUnitToShow = _leastSignificantUnitToShow;
 
 - (id)init {
     self = [super init];
@@ -79,6 +80,8 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     self.approximateQualifierFormat = NSLocalizedStringFromTable(@"about %@", @"FormatterKit", @"Approximate Qualifier Format");
 
     self.presentTimeIntervalMargin = 1;
+    
+    self.leastSignificantUnitToShow = NSSecondCalendarUnit;
 
     return self;
 }
@@ -109,17 +112,22 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     NSString *string = nil;
     BOOL isApproximate = NO;
     for (NSString *unitName in [NSArray arrayWithObjects:@"year", @"month", @"week", @"day", @"hour", @"minute", @"second", nil]) {
-        NSNumber *number = [NSNumber numberWithInteger:abs([[components valueForKey:unitName] integerValue])];
-        if ([number integerValue]) {
+        
+        NSCalendarUnit unit = NSCalendarUnitFromString(unitName);
+        if(!string || self.leastSignificantUnitToShow >= unit){
             
-            NSString *suffix = [NSString stringWithFormat:@"%@ %@", number, [self localizedStringForNumber:[number integerValue] ofCalendarUnit:NSCalendarUnitFromString(unitName)]];
-            
-            if (!string) {
-                string = suffix;
-            } else if(self.showsAllUnitsPrecisely){
-                string = [string stringByAppendingFormat:@" %@", suffix];
-            }else{
-                isApproximate = YES;
+            NSNumber *number = [NSNumber numberWithInteger:abs([[components valueForKey:unitName] integerValue])];
+            if ([number integerValue]) {
+                
+                NSString *suffix = [NSString stringWithFormat:@"%@ %@", number, [self localizedStringForNumber:[number integerValue] ofCalendarUnit:unit]];
+                
+                if (!string) {
+                    string = suffix;
+                } else if(self.showsAllUnitsPrecisely){
+                    string = [string stringByAppendingFormat:@" %@", suffix];
+                }else{
+                    isApproximate = YES;
+                }
             }
         }
     }
