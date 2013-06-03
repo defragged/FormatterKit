@@ -103,6 +103,7 @@ enum {
             break;
         case NoApproximationSectionIndex:
             [_timeIntervalFormatter setShowsAllUnitsPrecisely:YES];
+            [_timeIntervalFormatter setLeastSignificantUnitToShow:NSMinuteCalendarUnit];
             break;
     }
     
