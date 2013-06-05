@@ -96,13 +96,15 @@ enum {
     switch (indexPath.section) {
         case StandardPastSectionIndex:
         case StandardFutureSectionIndex:
+            [_timeIntervalFormatter setShouldApproximate:YES];
             [_timeIntervalFormatter setUsesIdiomaticDeicticExpressions:NO];
             break;
         case IdiomaticDeicticExpressionsSectionIndex:
+            [_timeIntervalFormatter setShouldApproximate:YES];
             [_timeIntervalFormatter setUsesIdiomaticDeicticExpressions:YES];
             break;
         case NoApproximationSectionIndex:
-            [_timeIntervalFormatter setShowsAllUnitsPrecisely:YES];
+            [_timeIntervalFormatter setShouldApproximate:NO];
             [_timeIntervalFormatter setLeastSignificantUnitToShow:NSMinuteCalendarUnit];
             break;
     }

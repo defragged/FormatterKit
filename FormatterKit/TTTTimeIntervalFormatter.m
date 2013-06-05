@@ -60,7 +60,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 @synthesize usesAbbreviatedCalendarUnits = _usesAbbreviatedCalendarUnits;
 @synthesize usesApproximateQualifier = _usesApproximateQualifier;
 @synthesize usesIdiomaticDeicticExpressions = _usesIdiomaticDeicticExpressions;
-@synthesize showsAllUnitsPrecisely = _showsAllUnitsPrecisely;
+@synthesize shouldApproximate = _shouldApproximate;
 @synthesize leastSignificantUnitToShow = _leastSignificantUnitToShow;
 
 - (id)init {
@@ -82,6 +82,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     self.presentTimeIntervalMargin = 1;
     
     self.leastSignificantUnitToShow = NSSecondCalendarUnit;
+    self.shouldApproximate = YES;
 
     return self;
 }
@@ -123,7 +124,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
                 
                 if (!string) {
                     string = suffix;
-                } else if(self.showsAllUnitsPrecisely){
+                } else if(!self.shouldApproximate){
                     string = [string stringByAppendingFormat:@" %@", suffix];
                 }else{
                     isApproximate = YES;

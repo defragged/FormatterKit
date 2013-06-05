@@ -74,8 +74,11 @@
  */
 @property (nonatomic, assign) BOOL usesApproximateQualifier;
 
-/** Specifies that all units should be displayed, rather than just the most significant one that has a value. `NO` by default.  */
-@property (nonatomic, assign) BOOL showsAllUnitsPrecisely;
+/** Specifies that only the most significant unit should be displayed. `YES` by default.  */
+@property (nonatomic, assign) BOOL shouldApproximate;
+
+/** Specifies the least significant unit that should be displayed when not approximating. Defaults to `NSCalendarUnitSeconds`. Ignored if `shouldApproximate` is `YES`. */
+@property (nonatomic, assign) NSCalendarUnit leastSignificantUnitToShow;
 
 /**
  Specifies whether to use abbreviated calendar units to describe time intervals, for instance "wks" instead of "weeks" in English. Defaults to `NO`.
@@ -88,9 +91,6 @@
  @discussion This implementation is entirely separate from the equivalent behavior used by `NSDateFormatter`.
  */
 @property (nonatomic, assign) BOOL usesIdiomaticDeicticExpressions;
-
-/** Specifies the least significant unit that should be displayed. Defaults to `NSCalendarUnitSeconds`. */
-@property (nonatomic, assign) NSCalendarUnit leastSignificantUnitToShow;
 
 /**
  Returns a string representation of a time interval formatted using the receiver’s current settings.
