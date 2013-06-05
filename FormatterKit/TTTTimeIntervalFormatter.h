@@ -74,10 +74,10 @@
  */
 @property (nonatomic, assign) BOOL usesApproximateQualifier;
 
-/** Specifies that only the most significant unit should be displayed. `YES` by default.  */
-@property (nonatomic, assign) BOOL shouldApproximate;
+/** Specifies the number of units that should be displayed before approximating. `0` to show all units. `1` by default.  */
+@property (nonatomic, assign) NSUInteger numberOfSignificantUnitsToDisplay;
 
-/** Specifies the least significant unit that should be displayed when not approximating. Defaults to `NSCalendarUnitSeconds`. Ignored if `shouldApproximate` is `YES`. */
+/** Specifies the least significant unit that should be displayed when not approximating. Defaults to `NSCalendarUnitSeconds`. */
 @property (nonatomic, assign) NSCalendarUnit leastSignificantUnitToShow;
 
 /**
